@@ -95,7 +95,7 @@ DATABASE_OPTIONS = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'ibprojecten'),
         'USER': os.getenv('DATABASE_USER', 'ibprojecten'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'insecure'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'E?mQupA7n2WZvnzk'),
         'HOST': 'database',
         'PORT': '5432'
     },
@@ -111,7 +111,7 @@ DATABASE_OPTIONS = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'ibprojecten'),
         'USER': os.getenv('DATABASE_USER', 'ibprojecten'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'insecure'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'E?mQupA7n2WZvnzk'),
         'HOST': os.getenv(OVERRIDE_HOST_ENV_VAR),
         'PORT': os.getenv(OVERRIDE_PORT_ENV_VAR, '5432')
     },
