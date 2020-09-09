@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DQ Requirements</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"> 
+  <style type="text/css">
+
+    body {
+        font-family: 'Arial';
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-feature-settings: "kern", "liga";
+        font-feature-settings: "kern", "liga";
+        -webkit-text-size-adjust: 100%;
+        margin: 0;
+        padding:0
+    }
+
+    html {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size:100%
+    }
+
+    * {
+        quotes: '\201C' '\201D' '\2018' '\2019'
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+    <h1>Data Quality Requirements</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <!--<table id="requirements" class="table table-striped table-bordered" style="width:100%">-->
+        <table id="requirements" class="display nowrap" style="width:100%">
+          <thead>
+            <tr>
+              <th>Req. Id</th>
+              <th>Intake Date</th>
+              <th>Product Type</th>
+              <th>Product Name</th>
+              <th>Data Element</th>
+              <th>Dimension</th>
+              <th>Subdimension</th>
+              <th>Acceptance Criteria</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          var table = $('#requirements').DataTable({
+              dom: 'frtipB',
+              buttons: ['copy', 'csv', 'excel', 'pdf'],
+              serverSide: true,
+              ajax: "/api/requirement/?format=datatables",
+              columns: [
+                  {"data": "req_id", "sortable": false},
+                  {"data": "Intakedate", "searchable": false},
+                  {"data": "product.type.name"},
+                  {"data": "product.name"},
+                  {"data": "data_element.name"},
+                  {"data": "subdimension.dimension.name"},
+                  {"data": "subdimension.type.name", "name": "subdimension"},
+                  {"data": "subdimension.acceptance_criteria.value"},
+              ],
+          });
+      });
+  </script>
+</body>
+</html>
