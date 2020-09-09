@@ -33,7 +33,7 @@ SECRET_KEY = 'PNm2jNCU%U7bRidE'
 #DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+ALLOWEDHOSTS = ['*']
 
 # Application definition
 
@@ -185,7 +185,6 @@ REST_FRAMEWORK = {
 }
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -222,3 +221,4 @@ LOGGING = {
     },
 }
 
+ALLOWEDHOSTS += ipaddresses()
