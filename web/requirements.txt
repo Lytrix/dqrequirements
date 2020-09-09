@@ -3,4 +3,4 @@ django-cors-headers==2.1.0
 djangorestframework==3.9.1
 psycopg2-binary==2.8.6
 django-datatables-view==1.19.1
-
+djangorestframework-datatables==0.5.2
