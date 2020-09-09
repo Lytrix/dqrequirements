@@ -26,9 +26,8 @@ print(BASE_DIR)
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-insecure_secret = 'default_secret'
-SECRET_KEY = os.getenv('SECRET_KEY', insecure_secret)
-DEBUG = SECRET_KEY == insecure_secret
+
+SECRET_KEY = 'PNm2jNCU%U7bRidE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -93,7 +92,7 @@ WSGI_APPLICATION = 'ibprojecten.wsgi.application'
 
 DATABASE_OPTIONS = {
     LocationKey.docker: {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'ibprojecten'),
         'USER': os.getenv('DATABASE_USER', 'ibprojecten'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'insecure'),
@@ -101,15 +100,15 @@ DATABASE_OPTIONS = {
         'PORT': '5432'
     },
     LocationKey.local: {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'ibprojecten'),
         'USER': os.getenv('DATABASE_USER', 'ibprojecten'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'insecure'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'E?mQupA7n2WZvnzk'),
         'HOST': get_docker_host(),
         'PORT': '5402'
     },
     LocationKey.override: {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'ibprojecten'),
         'USER': os.getenv('DATABASE_USER', 'ibprojecten'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'insecure'),
@@ -168,13 +167,24 @@ DATE_FORMAT = '%d %b %Y'
 
 USE_TZ = True
 
+
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_datatables.renderers.DatatablesRenderer',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_datatables.filters.DatatablesFilterBackend',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
+    'PAGE_SIZE': 50,
+       'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
 }
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

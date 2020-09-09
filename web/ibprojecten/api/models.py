@@ -32,106 +32,106 @@ from datetime import datetime
 #         db_table = 'rol'
 
 class ProductType(models.Model):
-    product_type_id = models.AutoField(primary_key=True)
-    product_type_name = models.CharField(max_length=255, null=True)
-    product_description = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.product_type_name)
+        return '{}'.format(self.name)
 
     class Meta:
         db_table = 'product_type'
 
 
 class Product(models.Model):
-    product_id = models.AutoField(primary_key=True)
-    product_name = models.CharField(max_length=255, null=True)
-    product_type = models.ForeignKey(ProductType, blank=True,
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    type = models.ForeignKey(ProductType, blank=True,
                             related_name='product_type'
                             )
     def __str__(self):
-        return '{} - {}'.format(self.product_type, self.product_name)
+        return '{} - {}'.format(self.type, self.name)
 
     class Meta:
         db_table = 'product'
 
 
 class CriteriaType(models.Model):
-    criteria_type_id = models.AutoField(primary_key=True)
-    criteria_type_name = models.CharField(max_length=255, null=True)
-    criteria_description = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.criteria_type_name)
+        return '{}'.format(self.name)
 
 
 class Criteria(models.Model):
-    criteria_id = models.AutoField(primary_key=True)
-    criteria_type = models.ForeignKey(CriteriaType, blank=True, related_name='criteria_type', on_delete=models.CASCADE, null=True)
-    criteria_value = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    type = models.ForeignKey(CriteriaType, blank=True, related_name='criteria_type', on_delete=models.CASCADE, null=True)
+    value = models.CharField(max_length=255, null=True)
 
 
 class ScopeType(models.Model):
-    scope_id = models.AutoField(primary_key=True)
-    scope_name = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.scope_name)
+        return '{}'.format(self.name)
 
 
 class Scope(models.Model):
-    scope_id = models.AutoField(primary_key=True)
-    scope_type = models.CharField(max_length=255, null=True)
-    scope_description = models.ManyToManyField(ScopeType,
-                            related_name='scope_type')
+    id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=255, null=True)
+    #description = models.ManyToManyField(ScopeType,
+   #                         related_name='scope_type')
     def __str__(self):
-        return '{}'.format(self.scope_type)
+        return '{}'.format(self.type)
 
 
 class SubDimensionType(models.Model):
-    subdimension_type_id = models.AutoField(primary_key=True)
-    subdimension_type_name = models.CharField(max_length=255, null=True)
-    subdimension_type_description = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.subdimension_type_name)
+        return '{}'.format(self.name)
 
 
 class Dimension(models.Model):
-    dimension_id = models.AutoField(primary_key=True)
-    dimension_name = models.CharField(max_length=255, null=True)
-    dimension_description = models.CharField(max_length=255, null=True)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.dimension_name)
+        return '{}'.format(self.name)
 
     class Meta:
         db_table = 'dimension'
 
 
 class SubDimension(models.Model):
-    subdimension_id = models.AutoField(primary_key=True)
-    subdimension_type = models.ForeignKey(SubDimensionType, blank=True, related_name='subdimension_type', on_delete=models.CASCADE, null=True)
-    subdimension_acceptance_criteria = models.ForeignKey(Criteria, blank=True, related_name='acceptance_criteria', on_delete=models.CASCADE, null=True)
-    subdimension_scope = models.CharField(max_length=255, null=True)
-    subdimension_dimension = models.ForeignKey(Dimension,
+    id = models.AutoField(primary_key=True)
+    type = models.ForeignKey(SubDimensionType, blank=True, related_name='subdimension_type', on_delete=models.CASCADE, null=True)
+    acceptance_criteria = models.ForeignKey(Criteria, blank=True, related_name='acceptance_criteria', on_delete=models.CASCADE, null=True)
+    scope = models.CharField(max_length=255, null=True)
+    dimension = models.ForeignKey(Dimension,
                             related_name='dimension')
-    subdimension_description = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{} - {}'.format(self.subdimension_dimension, self.subdimension_type.subdimension_type_name)
+        return '{} - {}'.format(self.dimension, self.type.name)
 
     class Meta:
         db_table = 'subdimension'
 
 
 class DataElement(models.Model):
-    data_element_id = models.AutoField(primary_key=True)
-    data_element_name = models.CharField(max_length=255, null=True)
-    data_element_uri = models.CharField(max_length=255, null=True)
+    pid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    uri = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return '{}'.format(self.data_element_name)
+        return '{}'.format(self.name)
 
     class Meta:
         db_table = 'data_element'
@@ -170,7 +170,8 @@ class Requirement(models.Model):
     req_id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE, blank=True, null=True)
     data_element = models.ForeignKey(DataElement, blank=True, related_name='data_element', on_delete=models.CASCADE, null=True)
-    subdimension = models.ManyToManyField(SubDimension, related_name='requirement_subdimension')
+    subdimension = models.ForeignKey(SubDimension, related_name='requirement_subdimension')
+    # subdimension = models.ManyToManyField(SubDimension, related_name='requirement_subdimension')
     Intakedate = models.DateField(blank=False, default=datetime.now)
     #Organisatie_opdrachtgever = models.ForeignKey(Organisatie, blank=True, related_name='organisatie_project', on_delete=models.CASCADE, null=True)
 
@@ -189,7 +190,7 @@ class Requirement(models.Model):
     #    return '{}'.format(self.startdatum.year)
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.req_id, self.data_element, self.product.product_name)
+        return '{} - {} - {}'.format(self.req_id, self.data_element, self.product.name)
 
     class Meta:
         db_table = 'requirement'

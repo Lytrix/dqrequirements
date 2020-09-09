@@ -24,7 +24,9 @@ from ibprojecten.api.serializers import (ProductSerializer,
                                     SubDimensionSerializer,
                                     SubDimensionType,
                                     SubDimensionTypeSerializer,
-                                    DataElementSerializer)
+                                    DataElementSerializer,
+                                    )
+
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -41,10 +43,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+
 class ProductTypeViewSet(viewsets.ModelViewSet):
     """ ViewSet for viewing and editing Employee objects """
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
+
 
 class RequirementViewSet(viewsets.ModelViewSet):
     """ ViewSet for viewing and editing Employee objects """
@@ -100,6 +104,19 @@ class DataElementViewSet(viewsets.ModelViewSet):
     serializer_class = DataElementSerializer
 
 
+import collections
+
+def flatten(d, parent_key='', sep='_'):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+
+
 def requirementList(request):
     """
     List all code snippets, or create a new snippet.
@@ -107,8 +124,9 @@ def requirementList(request):
     if request.method == 'GET':
         requirements = Requirement.objects.all()
         serializer = RequirementSerializer(requirements, many=True)
+        # flattenedData = [flatten(item) for item in serializer.data]
+        # return JsonResponse(flattenedData, safe=False)
         return JsonResponse(serializer.data, safe=False)
-
 
 def requirementDetail(request, pk):
     """
