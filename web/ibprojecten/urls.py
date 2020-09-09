@@ -40,7 +40,7 @@ from ibprojecten.api.views import (HomePageView,
 router = DefaultRouter()
 router.register(prefix='products', viewset=ProductViewSet)
 router.register(prefix='producttype', viewset=ProductTypeViewSet)
-router.register(prefix='requirement', viewset=RequirementViewSet, base_name='requirement')
+router.register(prefix='requirement', viewset=RequirementViewSet)
 router.register(prefix='scope', viewset=ScopeViewSet)
 router.register(prefix='scopetype', viewset=ScopeTypeViewSet)
 router.register(prefix='criteria', viewset=CriteriaViewSet)
