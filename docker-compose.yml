@@ -12,7 +12,7 @@ services:
   web:
     build: ./web
     ports:
-      - "8080:8000"
+      - "80:8000"
     links:
       - database:database
     environment:
