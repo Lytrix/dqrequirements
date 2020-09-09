@@ -220,5 +220,3 @@ LOGGING = {
         },
     },
 }
-
-ALLOWEDHOSTS += ipaddresses()
