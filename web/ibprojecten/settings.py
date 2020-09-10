@@ -33,7 +33,7 @@ SECRET_KEY = 'PNm2jNCU%U7bRidE'
 #DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-ALLOWEDHOSTS = ['*']
+ALLOWEDHOSTS = ['178.128.245.174']
 
 # Application definition
 
@@ -189,6 +189,10 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#STATICFILES_DIRS = [
+#   os.path.join(BASE_DIR, "static"),
+#   ]
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..','static'))
 
 
