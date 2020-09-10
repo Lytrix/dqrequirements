@@ -56,15 +56,14 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" language="javascript" src="{% static 'jquery-3.5.1.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'dataTables.buttons.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'buttons.flash.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'jszip.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'pdfmake.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'vfs_fonts.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'buttons.html5.min.js' %}"></script>
-    <script type="text/javascript" language="javascript" src="{% static 'buttons.print.min.js' %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static '/js/jquery-3.5.1.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/dataTables.buttons.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/jszip.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/pdfmake.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/vfs_fonts.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/buttons.html5.min.js' %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static '/js/buttons.print.min.js' %}"></script>
   <script>
       $(document).ready(function() {
           var table = $('#requirements').DataTable({
